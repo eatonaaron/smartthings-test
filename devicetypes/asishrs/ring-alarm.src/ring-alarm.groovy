@@ -26,6 +26,11 @@ metadata {
 		capability "Alarm"
 		capability "Polling"
         capability "Presence Sensor"
+		capability "Audio Volume"
+		capability "Battery"
+        command "setVolume"
+		command "volumeUp"
+		command "volumedown"
 		command "off"
 		command "home"
 		command "away"
@@ -352,14 +357,14 @@ def refreshDeviceStatus(ringDeviceStatus, pollingInterval) {
                 }
                 break
             case 'range-extender.zwave' :
-            	//No Chile devices Yet for Range Extendar
+            	//No Child devices Yet for Range Extendar
                 if (device.faulted) 
                 	sendEvent(name: "ringrange${++rangeExtenderCount}", value: "offline", isStateChange: true, descriptionText: "${device.name} is Offline")
                 else
                     sendEvent(name: "ringrange${++rangeExtenderCount}", value: "online", isStateChange: true, descriptionText: "${device.name} is Online")
                 break
             case 'security-keypad' :
-            	//No Chile devices Yet for Range Extendar
+            	//No Child devices Yet for Range Extendar
                 if (device.faulted) 
                 	sendEvent(name: "ringkeypad${++keypadCount}", value: "offline", isStateChange: true, descriptionText: "${device.name} is Offline")
                 else
@@ -376,7 +381,7 @@ def refreshDeviceStatus(ringDeviceStatus, pollingInterval) {
                 }
                 break   
             case 'hub.redsky' :
-            	//No Chile devices Yet for Range Extendar
+            	//No Child devices Yet for Range Extendar
                 if (device.faulted) 
                 	sendEvent(name: "ringbase", value: "offline", isStateChange: true, descriptionText: "${device.name} is Online")
                 else

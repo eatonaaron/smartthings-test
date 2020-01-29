@@ -22,17 +22,29 @@
  *
  */
  metadata {
-	definition (name: "Ring Alarm Motion Sensor", namespace: "asishrs", author: "Asish Soudhamma", cstHandler: true) {
-		capability "Motion Sensor"
-        capability "Sensor"
-		capability "Tamper Alert"
-		capability "Battery"
+	definition (name: "Ring Alarm Range Extender", namespace: "asishrs", author: "Asish Soudhamma", cstHandler: true) {
+		
 	}
 
 	tiles() {
-		standardTile("motion", "device.motion", decoration: "flat", width: 2, height: 2) {
-            state("inactive", label: '${name}', icon: "st.motion.motion.inactive", backgroundColor: "#00A0DC")
-       		state("active", label: '${name}',icon: "st.motion.motion.active", backgroundColor: "#e86d13")
+        standardTile("contact", "device.contact", decoration: "flat", width: 2, height: 2) {
+        	state("closed", label:'${name}', icon:"st.contact.contact.closed", backgroundColor:"#00A0DC")
+			state("open", label:'${name}', icon:"st.contact.contact.open", backgroundColor:"#e86d13")     
         }
+		main(["contact"])
 	}
+}
+
+def refresh() {
+	log.debug("Ring Range Extender child refresh - ${device.deviceNetworkId}")
+    parent.childRefresh(device.deviceNetworkId)
+}
+
+def installed () {
+	log.debug("Ring Range Extender Installed - parent ${parent}, ${device.deviceNetworkId}")
+}
+
+def uninstalled () {
+	log.debug("Ring Range Extender Uninstalled - parent ${parent}, ${device.deviceNetworkId}")
+	//parent.delete()
 }

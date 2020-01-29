@@ -26,6 +26,8 @@
 		capability "Contact Sensor"
         capability "Sensor"
 		capability "Refresh"
+		capability "Tamper Alert"
+		capability "Battery"
 	}
 
 	tiles() {
